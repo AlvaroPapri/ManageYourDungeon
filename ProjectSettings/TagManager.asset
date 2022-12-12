@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Path
   - Treasure
+  - MovePoint
   layers:
   - Default
   - TransparentFX

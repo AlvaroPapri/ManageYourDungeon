@@ -7,24 +7,11 @@ public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] private List<Transform> _movePoints;
 
-    private void Start()
+    public void Move()
     {
-        StartCoroutine(Move());
-    }
-
-    IEnumerator Move()
-    {
-        yield return new WaitForSeconds(1f);
         gameObject.transform.DOMove(_movePoints[0].transform.position, 1f);
-
-        if (IsTreasureBox())
-        {
-            yield break;
-        }
         
         _movePoints.RemoveAt(0);
-
-        StartCoroutine(Move());
     }
 
     private bool IsTreasureBox()
