@@ -29,6 +29,7 @@ public class EnemyManager : MonoBehaviour
         }
         
         
-        GameManager.Instance.UpdateGameState(GameState.PrepareRound);
+        // GameManager.Instance.UpdateGameState(GameState.PrepareRound);
+        GameManager.Instance.UpdateGameState(GameState.BoxCheck);
     }
 }

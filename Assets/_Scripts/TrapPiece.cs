@@ -5,14 +5,15 @@ public class TrapPiece : MonoBehaviour
 {
     [SerializeField] private GameObject _grid;
     
-    private bool _dragging, _placed;
+    public bool isDragging, isPlaced;
 
     private Vector2 _offset;
 
     private PathSlot _slot;
+    
     private void Update()
     {
-        if (!_dragging) return;
+        if (!isDragging) return;
 
         var mousePosition = GetMousePos();
         
@@ -21,7 +22,7 @@ public class TrapPiece : MonoBehaviour
 
     private void OnMouseDown()
     {
-        _dragging = true;
+        isDragging = true;
         transform.SetParent(null);
         
         _offset = GetMousePos() - (Vector2)transform.position;
@@ -32,12 +33,12 @@ public class TrapPiece : MonoBehaviour
         if (Vector2.Distance(transform.position, _slot.transform.position) < 3)
         {
             transform.position = _slot.transform.position;
-            _placed = true;
+            isPlaced = true;
         }
         else
         {
             transform.SetParent(_grid.transform);
-            _dragging = false;
+            isDragging = false;
         }
     }
 
