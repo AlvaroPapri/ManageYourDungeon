@@ -49,7 +49,6 @@ public class TrapManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("ME DESACTIVO");
                 spikeTrap.DeActivateTrap();
                 yield return new WaitForSeconds(1f);
                 _isSpikeTurn = false;

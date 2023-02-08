@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8814903176298131319}
   - component: {fileID: 1471458505528849647}
   - component: {fileID: 7847009109313551508}
-  - component: {fileID: 5117451343985079513}
+  - component: {fileID: 428962686590903705}
   m_Layer: 0
   m_Name: Spike
   m_TagString: Untagged
@@ -121,14 +121,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spike: {fileID: 3833264775869048847}
---- !u!61 &5117451343985079513
+--- !u!61 &428962686590903705
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 461004756942287842}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -260,7 +260,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3833264775869048847}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0

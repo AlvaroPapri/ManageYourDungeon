@@ -17,29 +17,32 @@ public class TrapPiece : MonoBehaviour
 
         var mousePosition = GetMousePos();
         
-        transform.position = mousePosition - _offset;
+        // transform.position = mousePosition - _offset;
+        transform.position = mousePosition ;
     }
 
     private void OnMouseDown()
     {
         isDragging = true;
-        transform.SetParent(null);
-        
-        _offset = GetMousePos() - (Vector2)transform.position;
+        Debug.Log(transform.position);
+        transform.parent = null;
+        Debug.Log(transform.position);
+
+        // _offset = GetMousePos() - (Vector2)transform.position;
     }
 
     private void OnMouseUp()
     {
-        if (Vector2.Distance(transform.position, _slot.transform.position) < 3)
-        {
-            transform.position = _slot.transform.position;
-            isPlaced = true;
-        }
-        else
-        {
-            transform.SetParent(_grid.transform);
+        // if (Vector2.Distance(transform.position, _slot.transform.position) < 3)
+        // {
+        //     transform.position = _slot.transform.position;
+        //     isPlaced = true;
+        // }
+        // else
+        // {
+            transform.parent = _grid.transform;
             isDragging = false;
-        }
+        // }
     }
 
     Vector2 GetMousePos()
