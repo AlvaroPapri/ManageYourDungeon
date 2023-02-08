@@ -5805,10 +5805,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spike
       objectReference: {fileID: 0}
+    - target: {fileID: 1450631101247686733, guid: 30a726cd4f24a794889e2ccbaba021ad, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1471458505528849647, guid: 30a726cd4f24a794889e2ccbaba021ad, type: 3}
       propertyPath: _grid
       value: 
       objectReference: {fileID: 1901656384}
+    - target: {fileID: 3833264775869048847, guid: 30a726cd4f24a794889e2ccbaba021ad, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4130788800946435661, guid: 30a726cd4f24a794889e2ccbaba021ad, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

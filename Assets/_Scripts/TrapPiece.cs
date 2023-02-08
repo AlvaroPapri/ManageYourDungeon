@@ -4,49 +4,73 @@ using UnityEngine;
 public class TrapPiece : MonoBehaviour
 {
     [SerializeField] private GameObject _grid;
+    [SerializeField] public bool IsOnPathTile { get; private set; }
     
     public bool isDragging, isPlaced;
-
     private Vector2 _offset;
-
     private PathSlot _slot;
+    private BoxCollider2D _boxCollider;
+    private GameObject _pathTile;
     
+    private void Awake()
+    {
+        _boxCollider = GetComponent<BoxCollider2D>();
+    }
+
     private void Update()
     {
         if (!isDragging) return;
 
         var mousePosition = GetMousePos();
         
-        // transform.position = mousePosition - _offset;
         transform.position = mousePosition ;
     }
 
     private void OnMouseDown()
     {
         isDragging = true;
-        Debug.Log(transform.position);
-        transform.parent = null;
-        Debug.Log(transform.position);
-
-        // _offset = GetMousePos() - (Vector2)transform.position;
+        transform.SetParent(null);
+        
+        Debug.Log(_grid);
     }
 
     private void OnMouseUp()
     {
-        // if (Vector2.Distance(transform.position, _slot.transform.position) < 3)
-        // {
-        //     transform.position = _slot.transform.position;
-        //     isPlaced = true;
-        // }
-        // else
-        // {
-            transform.parent = _grid.transform;
+        //TODO: Sacar una pieza de un PATH e intentar ponerlo en otro falla y lo manda al GRID. Ajustarlo.
+        if (!IsOnPathTile)
+        {
+            transform.SetParent(_grid.transform);
             isDragging = false;
-        // }
+            return;
+        }
+         
+        transform.SetParent(_pathTile.transform);
+        transform.position = _pathTile.transform.position;
+        isDragging = false;
+
     }
 
     Vector2 GetMousePos()
     {
         return Camera.main.ScreenToWorldPoint(Input.mousePosition);
+    }
+
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.CompareTag("Path"))
+        {
+            IsOnPathTile = true;
+            _pathTile = col.gameObject;
+            Debug.Log("It is touching a PATH!");
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Path"))
+        {
+            IsOnPathTile = false;
+            Debug.Log("Not touching anymoooooore");
+        }
     }
 }

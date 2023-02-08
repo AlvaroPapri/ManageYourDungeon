@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1471458505528849647}
   - component: {fileID: 7847009109313551508}
   - component: {fileID: 428962686590903705}
+  - component: {fileID: 7775482324129583155}
   m_Layer: 0
   m_Name: Spike
   m_TagString: Untagged
@@ -147,6 +148,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!50 &7775482324129583155
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461004756942287842}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 1
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &3833264775869048847
 GameObject:
   m_ObjectHideFlags: 0
@@ -157,7 +179,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7109998297760440800}
   - component: {fileID: 3296657893158789124}
-  - component: {fileID: 1688508132162781599}
   - component: {fileID: 1450631101247686733}
   m_Layer: 0
   m_Name: DMG
@@ -238,21 +259,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1688508132162781599
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3833264775869048847}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abd465df1d88fcb4ab85772771c13ee8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _grid: {fileID: 0}
-  isDragging: 0
-  isPlaced: 0
 --- !u!61 &1450631101247686733
 BoxCollider2D:
   m_ObjectHideFlags: 0
