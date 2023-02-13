@@ -1,30 +1,31 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MenuManager : MonoBehaviour
+namespace _Scripts
 {
-
-    [SerializeField] private Button _playButton;
-    private void Awake()
+    public class MenuManager : MonoBehaviour
     {
-        GameManager.OnGameStateChanged += GameManagerOnOnGameStateChanged;
-    }
 
-    private void OnDestroy()
-    {
-        GameManager.OnGameStateChanged -= GameManagerOnOnGameStateChanged;
-    }
+        [SerializeField] private Button _playButton;
+        
+        private void Awake()
+        {
+            GameManager.OnGameStateChanged += GameManagerOnOnGameStateChanged;
+        }
 
-    private void GameManagerOnOnGameStateChanged(GameState state)
-    {
-        _playButton.interactable = state == GameState.PrepareRound;
-    }
+        private void OnDestroy()
+        {
+            GameManager.OnGameStateChanged -= GameManagerOnOnGameStateChanged;
+        }
 
-    public void PlayPressed()
-    {
-        GameManager.Instance.UpdateGameState(GameState.EnemyTurn);
+        private void GameManagerOnOnGameStateChanged(GameState state)
+        {
+            _playButton.interactable = state == GameState.PrepareRound;
+        }
+
+        public void PlayPressed()
+        {
+            GameManager.Instance.UpdateGameState(GameState.EnemyTurn);
+        }
     }
 }

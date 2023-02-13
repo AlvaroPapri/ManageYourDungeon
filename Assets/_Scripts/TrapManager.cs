@@ -1,60 +1,47 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _Scripts.Traps;
 using UnityEngine;
 
-public class TrapManager : MonoBehaviour
+namespace _Scripts
 {
-    public static TrapManager Instance;
+    public class TrapManager : MonoBehaviour
+    {
+        public static TrapManager Instance;
     
-    public static event Action OnSpikeTrapActivated;
+        public static event Action OnTrapActivated;
 
-    private bool _isSpikeTurn;
-
-    [SerializeField] private List<SpikeTrap> _spikeTraps;
-
-    private void Awake()
-    {
-        Instance = this;
-    }
-
-    private void Start()
-    {
-        GameManager.OnGameStateChanged += GameManagerOnOnGameStateChanged;
-    }
-
-    private void OnDestroy()
-    {
-        GameManager.OnGameStateChanged -= GameManagerOnOnGameStateChanged;
-    }
-
-    private void GameManagerOnOnGameStateChanged(GameState state)
-    {
-        if (state == GameState.BoxCheck)
+        private bool _isSpikeTurn;
+        private void Awake()
         {
-            StopCoroutine(ActivateSpikeTraps());
-            StartCoroutine(ActivateSpikeTraps());
+            Instance = this;
         }
-    }
 
-    IEnumerator ActivateSpikeTraps()
-    {
-        foreach (var spikeTrap in _spikeTraps)
+        private void Start()
         {
-            if (!_isSpikeTurn)
-            {
-                spikeTrap.ActivateTrap();
-                yield return new WaitForSeconds(1f);
-                _isSpikeTurn = true;
-            }
-            else
-            {
-                spikeTrap.DeActivateTrap();
-                yield return new WaitForSeconds(1f);
-                _isSpikeTurn = false;
-            }
+            GameManager.OnGameStateChanged += GameManagerOnOnGameStateChanged;
+        }
 
+        private void OnDestroy()
+        {
+            GameManager.OnGameStateChanged -= GameManagerOnOnGameStateChanged;
+        }
 
+        private void GameManagerOnOnGameStateChanged(GameState state)
+        {
+            if (state == GameState.BoxCheck)
+            {
+                StopCoroutine(ActivateTraps());
+                StartCoroutine(ActivateTraps());
+            }
+        }
+
+        IEnumerator ActivateTraps()
+        {
+            OnTrapActivated?.Invoke();
+            yield return new WaitForSeconds(2);
+            
             GameManager.Instance.UpdateGameState(GameState.EnemyTurn);
         }
     }

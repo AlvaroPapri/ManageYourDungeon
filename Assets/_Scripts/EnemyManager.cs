@@ -2,34 +2,57 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class EnemyManager : MonoBehaviour
+namespace _Scripts
 {
-    public static EnemyManager Instance;
-    
-    [SerializeField] private List<EnemyMovement> _enemies;
-
-    private void Awake()
+    public class EnemyManager : MonoBehaviour
     {
-        Instance = this;
-    }
+        public static EnemyManager Instance;
+        [SerializeField] private List<Enemy> enemies;
 
-    public void Move()
-    {
-        StopCoroutine(MoveEnemies());
-        StartCoroutine(MoveEnemies());
-    }
-
-    IEnumerator MoveEnemies()
-    {
-        foreach (var enemy in _enemies)
+        private void Awake()
         {
-            enemy.Move();
-            yield return new WaitForSeconds(1f);
+            Instance = this;
+            GameManager.OnGameStateChanged += GameManagerOnGameStateChanged;
         }
+
+        private void OnDestroy()
+        {
+            GameManager.OnGameStateChanged -= GameManagerOnGameStateChanged;
+
+        }
+
+        private void GameManagerOnGameStateChanged(GameState state)
+        {
+            if (enemies.Count <= 0)
+            {
+                GameManager.Instance.UpdateGameState(GameState.Victory);
+            }
+            
+            if (state == GameState.EnemyTurn)
+            {
+                Move();
+            }
+        }
+
+        public void Move()
+        {
+            StopCoroutine(MoveEnemies());
+            StartCoroutine(MoveEnemies());
+        }
+
+        IEnumerator MoveEnemies()
+        {
+            foreach (var enemy in enemies)
+            {
+                enemy.Move();
+                yield return new WaitForSeconds(1f);
+            }
         
         
-        // GameManager.Instance.UpdateGameState(GameState.PrepareRound);
-        GameManager.Instance.UpdateGameState(GameState.BoxCheck);
+            // GameManager.Instance.UpdateGameState(GameState.PrepareRound);
+            GameManager.Instance.UpdateGameState(GameState.BoxCheck);
+        }
     }
 }
